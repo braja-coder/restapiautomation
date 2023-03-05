@@ -11,6 +11,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -76,6 +77,25 @@ public class RestClient {
 			 }
 			 CloseableHttpResponse responsePostRequest = httpClient.execute(httpPost);//hit the GET URL
 			 return responsePostRequest;
+		}
+		
+		public CloseableHttpResponse put(String url, Map<String,String> headers) throws ClientProtocolException, IOException, ParseException {
+			
+			 CloseableHttpClient httpClient = HttpClients.createDefault();
+			 HttpPut httpPut =  new HttpPut(url);
+			 JSONParser parser = new JSONParser();
+			 Object object = parser.parse(new FileReader("D:\\SeleniumJava_Automation\\restapiautomation\\src\\test\\resources\\TestOutput\\putrequest_simple_update.json"));
+			 JSONObject jsonObject = (JSONObject) object;
+			 JSONObject data = (JSONObject) jsonObject.get("data");
+			 String jsonString = data.toString();
+			 StringEntity payload =  new StringEntity(jsonString);
+			 httpPut.setEntity(payload);	
+			 Set<Entry<String, String>> set = headers.entrySet();
+			 for(Entry<String, String> entry : set) {
+				 httpPut.addHeader(entry.getKey(),entry.getValue());
+			 }
+			 CloseableHttpResponse responsePutRequest = httpClient.execute(httpPut);//hit the GET URL
+			 return responsePutRequest;
 		}
 
 }

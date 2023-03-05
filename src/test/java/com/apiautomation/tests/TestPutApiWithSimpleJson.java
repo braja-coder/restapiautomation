@@ -10,16 +10,16 @@ import org.testng.annotations.Test;
 
 import com.apiautomation.base.BaseTest;
 
-public class TestPostApiWithSimpleJson extends BaseTest{
+public class TestPutApiWithSimpleJson extends BaseTest{
 	
 	@Test
-	public void testApiWithHeaders_SimpleJsonPost() throws ClientProtocolException, IOException {
+	public void testApiWithHeaders_SimpleJsonPut() throws ClientProtocolException, IOException {
 		try {
 			// get tresponseGetRequesthe Status code
-			int statusCode = responsePostRequest.getStatusLine().getStatusCode();
-			Assert.assertEquals(statusCode, responseStatuscode_201, "status code not 201");
+			int statusCode = responsePutRequest.getStatusLine().getStatusCode();
+			Assert.assertEquals(statusCode, responseStatuscode_200, "status code not 200");
 			
-			String responseString = EntityUtils.toString(responsePostRequest.getEntity(),"UTF-8");
+			String responseString = EntityUtils.toString(responsePutRequest.getEntity(),"UTF-8");
 			JSONObject responseJson = new JSONObject(responseString);
 			System.out.println(responseJson);
 		

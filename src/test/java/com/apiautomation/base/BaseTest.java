@@ -19,19 +19,31 @@ public class BaseTest extends Base{
 
 	
 	@BeforeMethod
-	public void executeGet(Method testMethod) throws IOException {
+	public void execute(Method testMethod) throws IOException {
 		if(testMethod.getName().contains("_GetApiWithHeaders")){
 			restClient = new RestClient();
 			Map<String, String> headersMap = new HashMap<String, String>();
 			headersMap.put("Content-Type", "application/json");
 			responseGetRequest = restClient.get(PropertiesValue.URL, headersMap);
 			
-		}else if(testMethod.getName().contains("_SimpleJson")) {
+		}else if(testMethod.getName().contains("_SimpleJsonPost")) {
 			restClient = new RestClient();
 			Map<String, String> headersMap = new HashMap<String, String>();
 			headersMap.put("Content-Type", "application/json");
 			try {
 				responsePostRequest = restClient.post(PropertiesValue.URL, headersMap);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+		}else if(testMethod.getName().contains("_SimpleJsonPut")){
+			restClient = new RestClient();
+			Map<String, String> headersMap = new HashMap<String, String>();
+			headersMap.put("Content-Type", "application/json");
+			try {
+				
+				responsePutRequest = restClient.put(PropertiesValue.URL_PUT, headersMap);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
