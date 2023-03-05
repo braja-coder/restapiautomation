@@ -14,7 +14,7 @@ public class Declarations {
 	public static Properties prop;
 	public static FileInputStream fileInputStream;
 	public CloseableHttpResponse responseGetRequest;
-	
+	public CloseableHttpResponse responsePostRequest;
 	//user defiend classes
 	public RestClient restClient;
 	
